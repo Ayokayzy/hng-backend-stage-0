@@ -4,7 +4,7 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && node dist/index.js",
+    "build": "tsc",
     "start": "npm run build && node dist/index.js",
     "dev": "nodemon",
     "test": "npx jest --config jest.config.js",
