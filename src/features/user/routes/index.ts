@@ -7,6 +7,6 @@ const router = Router();
  * @route GET /user/me
  * @desc Returns user profile information with a random cat fact
  */
-router.get("/me", getUserProfile);
+router.get("/", getUserProfile);
 
 export default router;

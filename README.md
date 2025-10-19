@@ -8,7 +8,7 @@ You can find the full API specification and example requests in the Postman docu
 
 ## Features
 
-- User profile endpoint (`/user/me`) that returns user data and a random cat fact.
+- User profile endpoint (`/me`) that returns user data and a random cat fact.
 - Fetches cat facts from the [catfact.ninja](https://catfact.ninja/) public API.
 
 ## Setup Instructions
@@ -46,7 +46,7 @@ npm run dev
 yarn dev
 ```
 
-The server will start on the default port (usually 3000). You can access the user profile endpoint at `http://localhost:3000/user/me`.
+The server will start on the default port (usually 3000). You can access the user profile endpoint at `http://localhost:3000/me`.
 
 ### Environment Variables
 
