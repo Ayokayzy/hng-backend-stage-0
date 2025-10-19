@@ -1,16 +1,9 @@
-import { jest } from "@jest/globals";
-
-const mockGet: jest.MockedFunction<
-  (url: string) => Promise<{ data: { fact?: string } }>
-> = jest.fn();
-
-await jest.unstable_mockModule("axios", () => ({
-  default: { get: mockGet },
-}));
-
-// 👇 Import after the mock
-const { getCatFact } = await import("../services/catFact");
+import axios from "axios";
+import { getCatFact } from "../services/catFact";
 import { ApiError } from "../../../utils/ApiError";
+
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("getCatFact service", () => {
   afterEach(() => {
@@ -18,7 +11,7 @@ describe("getCatFact service", () => {
   });
 
   it("should return a cat fact when API call succeeds", async () => {
-    mockGet.mockResolvedValueOnce({
+    mockedAxios.get.mockResolvedValueOnce({
       data: { fact: "Cats purr when content." },
     });
 
@@ -27,14 +20,12 @@ describe("getCatFact service", () => {
   });
 
   it("should throw ApiError when API returns no fact", async () => {
-    mockGet.mockResolvedValueOnce({ data: {} });
-
+    mockedAxios.get.mockResolvedValueOnce({ data: {} });
     await expect(getCatFact()).rejects.toThrow(ApiError);
   });
 
   it("should throw ApiError when API call fails", async () => {
-    mockGet.mockRejectedValueOnce(new Error("Network error"));
-
+    mockedAxios.get.mockRejectedValueOnce(new Error("Network error"));
     await expect(getCatFact()).rejects.toThrow(ApiError);
     await expect(getCatFact()).rejects.toThrow("Failed to fetch cat fact");
   });

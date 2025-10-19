@@ -1,13 +1,13 @@
 {
   "name": "stage-0",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "build": "tsc && node dist/index.js",
+    "start": "npm run build && node dist/index.js",
     "dev": "nodemon",
-    "test": "node --experimental-vm-modules ./node_modules/.bin/jest --config jest.config.mjs",
+    "test": "npx jest --config jest.config.js",
     "postinstall": "npm run build"
   },
   "keywords": [],
@@ -25,6 +25,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
